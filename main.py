@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 
-app.secret_key = 'CleanDeSouza'
+
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
