@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}View Orders{% endblock %} 
+{% block nav %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1>Your Total Orders</h1>
+  <div class="accordion" id="ordersAccordion">
+    <ul id="list">
+      <li>
+        <h3>Your In Process Orders</h3>
+        <ul>
+          {% for item in processing %}
+          <a href="/order/edit/{{item.OrderId}}">
+            <li>{{item.TotalCost}}, {{item.Order_Time}} {{item.Status}}</li>
+          </a>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <h3>Your In Preparation Orders</h3>
+        <ul>
+          {% for item in pending %}
+          <a href="/order/edit/{{item.OrderId}}">
+            <li>{{item.TotalCost}}, {{item.Order_Time}} {{item.Status}}</li>
+          </a>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <h3>Your Completed Orders</h3>
+        <ul>
+          {% for item in completed %}
+          <a href="/order/edit/{{item.OrderId}}">
+            <li>{{item.TotalCost}}, {{item.Order_Time}} {{item.Status}}</li>
+          </a>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <h3>Your Canceled Orders</h3>
+        <ul>
+          {% for item in canceled %}
+          <a href="/order/edit/{{item.OrderId}}">
+            <li>{{item.TotalCost}}, {{item.Order_Time}} {{item.Status}}</li>
+          </a>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <h3>Your Processing Orders</h3>
+        <ul>
+          {% for item in processing %}
+          <a href="/order/edit/{{item.OrderId}}">
+            <li>{{item.TotalCost}}, {{item.Order_Time}} {{item.Status}}</li>
+          </a>
+          {% endfor %}
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

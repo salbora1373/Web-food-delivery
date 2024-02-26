@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block title %}View Orders{% endblock %} {% block
+nav %}
+
+{% endblock %} {% block content %}
+<h1>Order</h1>
+<ul id="list">
+  {% for item in current_order %}
+
+  <li>{{item.ItemName}}, {{item.Quantity}}</li>
+
+  {% endfor %}
+</ul>
+<p>Time of order: {{order_time}}</p>
+<p>Total:{{total_cost}}</p>
+<form method="POST">
+  <select name="status" id="status">
+    <option value="Preparing" >Preparing</option>
+    <option value="Complete" >Complete</option>
+    <option value="Canceled" >Cancelled</option>
+  </select>
+  <button type="submit">Update Status</button>
+</form>
+{% endblock %}

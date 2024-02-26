@@ -1,0 +1,105 @@
+{% extends "base.html" %} {% block title %}View Orders{% endblock %} 
+{% block content %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+  </head>
+  <body>
+ 
+   <h1 class="text-center display-3">{{name}}</h1>
+   
+	   
+			<p id="demo"></p>
+    {% for item in items %}
+    
+      <div class="container rounded my-2" style="background-color:#d9a429">
+        
+        <h1 class="text-center">{{item.ItemName}}</h1>
+        <div class="row">
+        <div class="col-6">
+         <p class=" text-muted">{{item.Name}}</p>
+				<p class="lead">{{item.ItemDescription}}</p>
+        <p class="font-weight-bold"> ${{item.Price}}</p>
+        </div>
+          <div class="col">
+				<img src="{{ item['image_path'] }}" width="50%" height="50%" alt="item Image"> 
+          </div>
+          <div class="col align-self-center " >
+        <button  type="button" class="btn btn-primary btn-lg" onclick="addItem({{item.ItemID}}, '{{item.ItemName}}',{{item.Price}})"> + </button> 
+          </div>
+        </div>
+      </div>
+			
+    {% endfor %}
+		
+		<form action="/cart" method="post">
+			<input type="hidden" name="items" id="items" value="submit">
+      <input type="hidden" name="total" id="totalPassed">
+      <div class="form-group container">
+        <div class="row">
+      <div class="col">    
+      <textarea name="additionalText"  class="form-control"  placeholder="Additional text.."></textarea>
+      </div>
+			<button type="submit " class="btn btn-primary btn-lg">Proceed to Checkout</button>
+        </div>
+		</form>
+
+		
+    <h1 class="my-3">
+      Your pending orders:
+      </h1>
+      <ul id="cart"></ul>
+      <p>Your total: <span id="total">$0</p>
+    {% block javascript %}
+    <script type="text/javascript">
+      const selectedItems= []
+      
+      function updateList() {
+      
+        document.getElementById('cart').innerHTML = selectedItems.map((item,index) => {
+          return `<li class='py-1'>${ item.itemName }, ${item.price}, Quantity: ${item.quantity}<button onclick="removeItem(${index})" class='btn btn-danger btn-lg mx-4'> Remove</button><button onclick="decrementQuantity(${index})" class='btn btn-lg btn-warning' >-1</li>`;
+        }).join('');
+        
+        document.getElementById( 'items' ).value = JSON.stringify(selectedItems);
+        
+        const sum = selectedItems.reduce((partialSum, a) =>  partialSum + (a.price * a.quantity), 0);
+        document.getElementById('total').innerText = "$" + sum;
+        document.getElementById('totalPassed').value = sum;
+      }
+      
+      function addItem(id, itemName, price) {
+        if(!selectedItems.length) {
+        selectedItems.push({"item": id, itemName, price, quantity:1})
+        }
+        else {
+          let temp = selectedItems.find(item => item.item === id)
+          if (temp != undefined) { 
+            temp.quantity+= 1
+          } else {
+            selectedItems.push({"item": id, itemName, price, quantity:1})
+          }
+        }
+    
+        updateList()
+
+      }
+
+      function removeItem(index) {
+        selectedItems.splice(index,1);
+        updateList();
+      }
+      
+      function decrementQuantity(index) {
+        let quantity = selectedItems[index].quantity - 1
+        if(quantity) {
+          selectedItems[index].quantity = quantity; 
+        }
+        updateList()
+      }
+    </script>
+    {% endblock %}
+  </body>
+</html>
+{% endblock %}

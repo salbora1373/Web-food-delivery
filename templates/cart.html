@@ -1,0 +1,22 @@
+<title>Checkout</title>
+{% extends "base.html" %} {% block title %}View Orders{% endblock %} 
+
+{% block content %}
+    <ul class="list-group py-2 text-center">
+		{% for item in cart %}
+				<li class="list-group-item w-50">
+          <div>
+          <h2>{{item['itemName']}} </h2>
+            <p>
+            </p>
+              ${{item.price}} 
+            <p>Quantity: {{item.quantity}}  </p>
+            </div>
+        </li>
+		{% endfor %}
+    </ul>
+    <p class="py-2">Total: <span class="font-weight-bold">${{total}}</span></p>
+    <p>Additional text:<span class="lead"> {{additionalText}} </span></p> 
+  <button class="btn btn-link">  <a href="/order_customer">Continue to checkout </button></a>
+
+{% endblock %}

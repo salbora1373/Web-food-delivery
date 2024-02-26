@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %} Login {% endblock %} 
+
+{% block content %} 
+
+{% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+<div class="flashes">
+	{% for category, message in messages %}
+	<li class="{{ category }}">{{ message }}</li>
+	{% endfor %}
+</div>
+{% endif %} {% endwith %}
+
+<div class="container-fluid">
+	
+	<form class="mx-auto" name="login-form" method="post" action="{{ url_for('login') }}">
+		<h4 class="text-center">Login</h4>
+		<div class="mb-3 mt-5">
+			<label for="email" class="form-label">Email Address</label>
+			<input type="email" class="form-control" id="email" name="email" required />
+		</div>
+		<div class="mb-3 mt-5">
+			<label for="password" class="form-label">Password</label>
+			<input type="password" class="form-control" id="password" name="password" required />
+		</div>
+		<button type="submit" class="btn btn-primary">Login</button>
+	</form>
+</div>
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+{% endblock %}
+
+

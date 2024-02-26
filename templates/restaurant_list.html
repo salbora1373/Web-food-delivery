@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Restaurant List{% endblock %} {%
+block content %}
+
+<div class="container-fluid mt-6">
+		<h2>List of Restaurants</h2>
+		{% for restaurant in restaurants %}
+		<div class="mt-4">
+				<div class="table-container">
+						<table>
+							<tbody>
+								<tr>
+										<td class="RImage" rowspan="3"> <img src="{{ restaurant['image_path'] }}" width="140" alt="Restaurant Image"></td>
+										<td class="RName"><h2>{{ restaurant.RestaurantName }}</h2></td>
+										<td class="RTime"">{{ restaurant.OpeningTime }}-{{ restaurant.ClosingTime }}</td>
+								</tr>
+								<tr>
+										<td>Address</td>
+										<td></td>
+								</tr>
+								<tr>
+										<td>{{ restaurant.description }}</td>
+										<td><a href="/menu/{{ restaurant.RestaurantID }}">View Menu</a></td>
+								</tr>
+							</tbody>
+						</table>
+				</div>
+		</div>
+		{% endfor %}
+</div>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='restaurant_list.css') }}">
+{% endblock %}

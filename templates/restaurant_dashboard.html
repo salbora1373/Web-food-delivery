@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block title %}Restaurant Dashboard{% endblock %} {%
+block content %}
+<div class="container mt-5">
+<h1 class="display-4">Welcome to the Restaurant Dashboard</h1>
+<nav class="mt-4">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active bg-primary text-white px-3 py-2"  href="/view_orders/restaurant">View Orders</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active bg-primary text-white px-3 py-2" href="/restaurant/add_to_menu">Add Items</a>
+        </li>
+    </ul>
+</nav>
+
+</div>
+<style>
+  .bg-color {
+    background-color: #E98757;
+</style>
+{% endblock %}

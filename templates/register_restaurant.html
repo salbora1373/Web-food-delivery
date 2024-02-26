@@ -1,0 +1,170 @@
+{% extends "base.html" %} {% block title %}Register Restaurant
+
+{% endblock %}
+{% block content %}
+
+<h1 style="text-align: center; margin-top: 20px;"> Register as restaurant</h1>
+<div style="text-align: center;">
+
+	<a href="/register_customer" style="margin-right: 10px; text-decoration: none;">
+		<button style="margin-top: 10px;">Customer account</button>
+	</a>
+	<a href="/register_restaurant" style="text-decoration: none;">
+		<button style="margin-top: 10px;">restaurant account</button>
+	</a>
+</div>
+<form id="form" method="post" enctype="multipart/form-data" style="text-align: center; max-width: 400px; margin: auto;">
+	<div style="text-align: left; margin-top: 10px;">
+		<label for="name">Restaurant Name</label>
+		<input type="text" class="my-2" name="name" placeholder id="names"><br>
+
+		<label for="email"> Email</label>
+		<input type="email" class="my-2" name="email" id="email"><br>
+
+		<label for="password">Password</label>
+		<input type="text" class="my-2" name="password" id="password"><br>
+
+		<label for="postcode">Postcode</label>
+		<input type="number" name="postcode" class="my-2" id="postcode"><br>
+
+		<label for="address">Address</label>
+		<input type="text" name="address" class="my-2" id="address"><br>
+
+		Restaurant Details:<br>
+
+		<label for="description"> Description</label>
+		<input type="text" class="my-2" name="description" required id="description"><br>
+
+		<label for="opening_time"> Opening time</label>
+		<input type="time" class="my-2" name="opening_time"><br>
+
+		<label for="closing_time"> Closing time</label>
+		<input type="time" class="my-2" name="closing_time"><br>
+
+		<label for="picture"> Restaurant Logo</label>
+		<input type="file" class="my-2" name="picture"><br>
+
+		Delivery Postcodes:<input id="inputPostcode" type="number" class="my-2">
+		<button type="button" id="addPostcode">+</button>
+
+		<div class="my-2">
+			<label for="postcodes">Postcodes</label>
+			<input type="text" id="postcodes" name="postcodes" readonly style="width:500px"><br>
+		</div>
+
+		<button type="submit" class="btn btn-primary btn-lg" class="my-2">Submit</button>
+	</div>
+</form>
+<script>
+	let addPostcodeButton = document.getElementById('addPostcode');
+	let inputPostcode = document.getElementById('inputPostcode');
+	var postcodes = [];
+
+	addPostcodeButton.addEventListener('click', function () {
+		if (inputPostcode.value && inputPostcode.value > 0) {
+			postcodes.push(inputPostcode.value);
+			document.getElementById("postcodes").value = postcodes.join(", ");
+			inputPostcode.value = "";
+		}
+	})
+
+	const form = document.getElementById('form');
+	const names = document.getElementById('names');
+	const email = document.getElementById('email');
+	const password = document.getElementById('password');
+	const postcode = document.getElementById('postcode');
+	const address = document.getElementById('address');
+	const description = document.getElementById('description');
+	const addPostcodeInput = document.getElementById('inputPostcode'); // Change this line
+
+	form.addEventListener('submit', e => {
+		e.preventDefault();
+		validateInputs();
+	});
+
+	const setError = (element, message) => {
+		const inputControl = element.parentElement;
+		const errorDisplay = inputControl.querySelector('.error');
+
+		errorDisplay.innerText = message;
+		inputControl.classList.add('error');
+		inputControl.classList.remove('success');
+	}
+
+	const setSuccess = element => {
+		const inputControl = element.parentElement;
+		const errorDisplay = inputControl.querySelector('.error');
+
+		errorDisplay.innerText = '';
+		inputControl.classList.add('success');
+		inputControl.classList.remove('error');
+	};
+
+	const isValidEmail = email => {
+		const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(String(email).toLowerCase());
+	}
+
+	const validateInputs = () => {
+		const nameValue = names.value.trim();
+		const emailValue = email.value.trim();
+		const passwordValue = password.value.trim();
+		const postcodeValue = postcode.value.trim();
+		const addressValue = address.value.trim();
+		const descriptionValue = description.value.trim();
+		const addPostcodeValue = addPostcodeInput.value.trim();
+
+		if (nameValue === '') {
+			setError(name, 'Name is required');
+		} else {
+			setSuccess(name);
+		}
+
+		if (emailValue === '') {
+			setError(email, 'Email is required');
+		} else if (!isValidEmail(emailValue)) {
+			setError(email, 'Provide a valid email address');
+		} else {
+			setSuccess(email);
+		}
+
+		if (passwordValue === '') {
+			setError(password, 'Password is required');
+		} else if (passwordValue.length < 8) {
+			setError(password, 'Password must be at least 8 characters.');
+		} else {
+			setSuccess(password);
+		}
+
+		if (postcodeValue === '') {
+			setError(postcode, 'Please enter your postcode');
+		} else if (postcodeValue.length !== 5) {
+			setError(postcode, 'Please enter a 5-digit postcode');
+		} else {
+			setSuccess(postcode);
+		}
+
+		if (addressValue === '') {
+			setError(address, 'Please enter your address');
+		} else {
+			setSuccess(address);
+		}
+
+		if (descriptionValue === '') {
+			setError(description, 'Please enter your description');
+		} else {
+			setSuccess(description);
+		}
+
+		if (addPostcodeValue === '') {
+			setError(addPostcodeInput, 'Please enter a postcode');
+		} else if (addPostcodeValue.length !== 5) {
+			setError(addPostcodeInput, 'Please enter a 5-digit postcode');
+		} else {
+			setSuccess(addPostcodeInput);
+		}
+	};
+</script>
+
+
+{% endblock %}

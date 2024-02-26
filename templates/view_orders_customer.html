@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}View Orders{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h1 class="display-4">All Your Orders</h1>
+  <ul class="list-group" id="list">
+    {% for item in past_orders %}
+    <a href="/view_orders/customer/{{item.OrderId}}" class="list-group-item list-group-item-action {% if item.Status == 'completed' %}list-group-item-success{% elif item.Status == 'canceled' %}list-group-item-danger{% else %}list-group-item-info{% endif %}">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ item.Order_Time }}</h5>
+        <small>Total Cost: {{ item.TotalCost }}</small>
+        <small>Status: {{ item.Status }}</small>
+      </div>
+    </a>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+			/>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"/>
+		
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+		
+    <style>
+			
+      * {text-decoration:none;font-family: 'Roboto', sans-serif }
+			
+			.nav-item + .nav-item {
+					margin-left: 10px;
+			}
+			.navbar {
+					border-bottom: 2px solid #005151;
+				  border-top: 2px solid #005151;
+			}
+			.custom-button {
+				background-color: #005151; 
+				color: #E98757; 
+				font-size: 13px;
+				width: 100px;
+				border: 3px solid #005151;
+			}
+			.custom-button:hover {
+				color: #005151;
+				background-color: #E98757; 
+				
+			}
+	
+    </style>
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+	
+  <body>
+
+		<nav class="navbar navbar-expand-lg" style="background-color: #E98757">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='LieferspatzLogo.png') }}" width="200" height="45" class="d-inline-block align-top" alt=""></a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav ml-auto">
+
+						<li class="nav-item">
+							<a>{% block nav %} {% endblock %}</a>
+						</li>
+
+						{% if current_user.is_authenticated %}
+						<li class="nav-item">
+							<a class="nav-link btn custom-button rounded-pill" href="/logout" ">Logout</a>
+						</li>
+						{% else %}
+						<li class="nav-item ms-2">
+							<a class="nav-link btn custom-button rounded-pill" href="/login" ">Login</a>
+						</li>
+
+						<li class="nav-item ms-2">
+							<a class="nav-link btn custom-button rounded-pill" href="/" >Register</a>
+						</li>
+						{% endif %}
+
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+    <div class="container">{% block content %}{% endblock %}</div>
+		
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+		
+  </body>
+	
+</html>

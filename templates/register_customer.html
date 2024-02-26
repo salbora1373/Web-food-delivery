@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block title %}Register Customer{% endblock %}
+
+{% block content %}
+<h1 class="text-center my-3"> Register as customer</h1>
+<div class="container-fluid">
+	<div style="text-align: center;">
+		<!-- Button to navigate to Page 1 -->
+		<a href="/register_customer" style="margin-right: 10px; text-decoration: none;">
+			<button style="margin-top: 10px;">Customer account</button>
+		</a>
+
+		<!-- Button to navigate to Page 2 -->
+		<a href="/register_restaurant" style="text-decoration: none;">
+			<button style="margin-top: 10px;">restaurant account</button>
+		</a>
+	</div>
+
+	<form method="post" enctype="multipart/form-data" style="text-align: center; max-width: 400px; margin: auto;">
+		<div style="text-align: left; margin-top: 10px;">
+			<label for="fname">First Name</label>
+			<input type="text" autofocus name="fname"><br>
+			<label for="lname">Last Name</label>
+			<input type="text" name="lname"><br>
+			<label for="email">Email</label>
+			<input type="text" name="email"><br>
+			<label for="Password">Password</label>
+			<input type="text" name="password"><br>
+			<label for="postcode">Postcode</label>
+			<input type="text" name="postcode"><br>
+			<label for="address">Address</label>
+			<input tope="text" name="address"><br>
+			<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+		</div>
+	</form>
+
+	{% endblock %}

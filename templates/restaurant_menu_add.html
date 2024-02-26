@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Register Restaurant{% endblock %}
+
+{% block content %}
+<div style="text-align: center;">
+  <h1 style="margin-top: 20px;">Register New Item</h1>
+</div>
+
+<form method="post" enctype="multipart/form-data" style="max-width: 400px; margin: auto; margin-top: 20px;">
+  <p>
+    <label for="item">Name:</label>
+    <input name="item" type="text" placeholder="Item">
+  </p>
+  <p>
+    <label for="picture">Picture:</label>
+    <input name="picture" type="file">
+  </p>
+  <p>
+    <label for="category">Category:</label>
+    <select name="category">
+      <option value="1">Appetizer</option>
+      <option value="2">Main Course</option>
+      <option value="3">Dessert</option>
+      <option value="4">Drinks</option>
+    </select>
+  </p>
+  <p>
+    <label for="price">Price:</label>
+    <input name="price" type="text" placeholder="$12">
+  </p>
+  <p>
+    <label for="description">Description:</label>
+    <input name="description" type="text" placeholder="Description">
+  </p>
+  <input type="submit" style="margin-top: 10px;">
+</form>
+
+<p id="demo"></p>
+
+<table style="width: 80%; margin: auto; margin-top: 20px; border-collapse: collapse;">
+  <tr style="background-color: #f2f2f2;">
+    <th style="padding: 10px; text-align: left;">Item Name</th>
+    <th style="padding: 10px; text-align: left;">Description</th>
+    <th style="padding: 10px; text-align: left;">Category</th>
+    <th style="padding: 10px; text-align: left;">Price</th>
+  </tr>
+
+  {% for item in items %}
+  <tr>
+    <td style="padding: 10px;">{{ item.ItemName }}</td>
+    <td style="padding: 10px;">{{ item.ItemDescription }}</td>
+    <td style="padding: 10px;">{{ item.Category }}</td>
+    <td style="padding: 10px;">{{ item.Price }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

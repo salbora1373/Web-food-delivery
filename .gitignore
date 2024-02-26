@@ -1,0 +1,9 @@
+__pycache__
+.cache
+.local
+.pythonlibs
+.config
+.upm
+*.db
+.replit
+*.nix
