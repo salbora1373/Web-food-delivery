@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 
-
+app.secret_key = 'MY_SECRET'
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
@@ -20,11 +20,6 @@ login_manager.init_app(app)
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'static/uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-#button to show orders instead ->keith 
-#showing_restaurants, edit_order, datetime.datetime.now().hour : Keith
-# fix restaurant orders, check if email already exists -> Hussain
-# turn view_orders/customer into a table, table headings, order_id and restaurant_name -> ALi
-#register_customer styling -> Mina
 
 @login_manager.user_loader
 def load_user(user_id):
